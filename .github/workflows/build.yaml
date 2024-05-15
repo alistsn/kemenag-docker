@@ -15,7 +15,7 @@ jobs:
           docker build \
           -t ghcr.io/alistsn/laravel-app:latest .
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.TOKEN_TES }}" | docker login ghcr.io -u alistsn --password-stdin
+        run: echo "${{ secrets.TOKEN_TES }}" | docker login ghcr.io -u alistsn --password-
       - name: Push Docker Images
         run: |
           docker push ghcr.io/alistsn/laravel-app:latest
