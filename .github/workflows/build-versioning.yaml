@@ -5,7 +5,7 @@ on:
       - "*-rc"
 
 env:
-  RELEASE_VERSION: ${{  github.ref_name }}
+  RELEASE_VERSION: ${{ github.ref_name }}
 
 jobs:
   build:
