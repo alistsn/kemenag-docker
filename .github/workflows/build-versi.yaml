@@ -1,0 +1,25 @@
+name: Build Docker Images with Versioning
+on:
+  push:
+    tags:
+      - "*-rc"
+
+env:
+  RELEASE_VERSION: ${{ github.ref_name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build Docker Images
+        run: |
+          cd laravel
+          docker build \
+          -t ghcr.io/alistsn/laravel-app:$RELEASE_VERSION .
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.TOKEN_TES }}" | docker login ghcr.io -u alistsn --password-stdin
+      - name: Push Docker Images
+        run: |
+          docker push ghcr.io/alistsn/laravel-app:$RELEASE_VERSION
